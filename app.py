@@ -30,7 +30,7 @@ if parsed_text:
                 try:
                     client = openai.OpenAI(api_key=openai_api_key)
                     response = client.chat.completions.create(
-                        model="gpt-4",
+                        model="gpt-3.5-turbo",
                         messages=[{"role": "user", "content": prompt}],
                         temperature=0.7
                     )
