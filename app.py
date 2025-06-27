@@ -28,16 +28,13 @@ if parsed_text:
             with st.spinner("Analyzing via GPT..."):
                 prompt = f"You are an instructional designer. Based on the following pre-outline, answer questions about the course learning outcomes:\n\n{parsed_text}\n\nGenerate thoughtful, practical responses for instructional planning."
                 try:
-                    openai.api_key = openai_api_key
                     client = openai.OpenAI(api_key=openai_api_key)
-
-response = client.chat.completions.create(
-    model="gpt-4",
-    messages=[{"role": "user", "content": prompt}],
-    temperature=0.7
-)
-gpt_response = response.choices[0].message.content
-
+                    response = client.chat.completions.create(
+                        model="gpt-4",
+                        messages=[{"role": "user", "content": prompt}],
+                        temperature=0.7
+                    )
+                    gpt_response = response.choices[0].message.content
                     st.session_state['gpt_answers'] = gpt_response
                 except Exception as e:
                     st.error(f"Error from OpenAI: {e}")
